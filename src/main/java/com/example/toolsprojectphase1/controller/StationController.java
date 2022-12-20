@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/station")
-@CrossOrigin(allowedHeaders = "", origins = "")
+@CrossOrigin(allowedHeaders = "*", origins = "*")
 public class StationController {
     @Autowired
     StationService stationservice;
