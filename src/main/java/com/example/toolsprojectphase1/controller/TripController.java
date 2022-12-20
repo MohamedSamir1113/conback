@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/trip")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(allowedHeaders = "", origins = "")
 public class TripController {
     @Autowired
     TripService tripService;
