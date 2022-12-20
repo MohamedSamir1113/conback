@@ -7,63 +7,63 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "trip")
 public class Trip {
+
+    @ManyToOne
+    @JoinColumn(name="admin_id")
+    private Admin admin;
+
+    public void setUser(Admin admin) {
+        this.admin = admin;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long trip_id;
+    private String startTime;
+    private String endTime;
+    private String fromStation;
+    private String toStation;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="StationXTrip",
-            joinColumns = @JoinColumn(name="trip_id"),
-            inverseJoinColumns = @JoinColumn(name="station_id"))
-    private Set<Station> stations;
 
-    @OneToOne
-    private Station from_station;
-
-    @OneToOne
-    private Station to_station;
-    private LocalDateTime start_time;
-    private LocalDateTime end_time;
-
-    public Station getFrom_station() {
-        return from_station;
-    }
-
-    public void setFrom_station(Station from_station) {
-        this.from_station = from_station;
-    }
-
-    public Station getTo_station() {
-        return to_station;
-    }
-
-    public void setTo_station(Station to_station) {
-        this.to_station = to_station;
+    public void setId(Long id) {
+        this.trip_id = id;
     }
 
     public Long getId() {
-        return id;
+        return trip_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalDateTime getStart_time() {
-        return start_time;
+    public String getStartTime() {
+        return this.startTime;
     }
 
-    public void setStart_time(LocalDateTime start_time) {
-        this.start_time = start_time;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public LocalDateTime getEnd_time() {
-        return end_time;
+    public String getEndTime() {
+        return this.endTime;
     }
 
-    public void setEnd_time(LocalDateTime end_time) {
-        this.end_time = end_time;
+    public void setFromStation(String fromStation) {
+        this.fromStation = fromStation;
     }
+
+    public String getFromStation() {
+        return this.fromStation;
+    }
+
+    public void setToStation(String toStation) {
+        this.toStation = toStation;
+    }
+
+    public String getToStation() {
+        return this.toStation;
+    }
+
 }

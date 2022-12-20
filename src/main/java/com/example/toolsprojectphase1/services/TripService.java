@@ -1,7 +1,7 @@
 package com.example.toolsprojectphase1.services;
 
 import com.example.toolsprojectphase1.entities.Trip;
-import com.example.toolsprojectphase1.repositories.TripRepo;
+import com.example.toolsprojectphase1.JPA.TripJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +10,31 @@ import java.util.List;
 @Service
 public class TripService {
     @Autowired
-    TripRepo TripRepo;
-
-    public void createTrip(Trip T) {
-        TripRepo.save(T);
+    TripJPA tripJPA;
+    Trip tr;
+    public void createTrip(Trip t){
+        tripJPA.save(t);
     }
 
-    public Trip getTrip(Long id) {
-        return TripRepo.findById(id).get();
+    public Trip getTrip(long id){return tripJPA.findById(id).get();}
+
+    public List<Trip> getAllTrips(){
+        return tripJPA.findAll();
     }
 
-    public List<Trip> getAllTrips() {
-        return TripRepo.findAll();
+    public void deleteTrip(Long id){
+        tripJPA.deleteById(id);
     }
 
-    public void deleteTrip(Long id) {
-        TripRepo.deleteById(id);
+    public Trip updateTrip(Trip body, Long id){
+
+        Trip trip= tripJPA.findById(id).get();
+        trip.setFromStation(body.getFromStation());
+        trip.setToStation(body.getToStation());
+        trip.setStartTime(body.getStartTime());
+        trip.setEndTime(body.getEndTime());
+        return tripJPA.save(trip);
     }
 
-    public void deleteAllTrips() {
-        TripRepo.deleteAll();
-    }
 
-    public void editTripById(Trip T) {
-        TripRepo.save(T);
-    }
 }
