@@ -11,7 +11,7 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(allowedHeaders = "", origins = "")
+@CrossOrigin(allowedHeaders = "*", origins = "*")
 
 public class AdminController {
     @Autowired
